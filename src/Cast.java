@@ -3,7 +3,19 @@ public class Cast {
     private String role;
 
     public Cast(String actorFullName, String role) {
-        this.actorFullName = actorFullName;
+        try{
+            if (!actorFullName.matches("[0-9]+")){
+                if (actorFullName.length() > 2){
+                    this.actorFullName = actorFullName;
+                }else {
+                    throw new Exception("Actor name must be more than 2 letters!");
+                }
+            }else {
+                throw new Exception("Actor name must be contain only letters!");
+            }
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
         this.role = role;
     }
 

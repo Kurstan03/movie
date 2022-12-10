@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,59 +58,71 @@ public class Main {
             Scanner scanner1 = new Scanner(System.in);
             commands();
             Movie movie = new Movie();
-            int num = scanner1.nextInt();
-            switch (num) {
-                case 1 -> {
-                    System.out.println("======================= ALL MOVIES =======================");
-                    movie.getAllMovies(movies).forEach(System.out::println);
+            try {
 
+                int num = scanner1.nextInt();
+                if (num > 0) {
+
+                    switch (num) {
+                        case 1 -> {
+                            System.out.println("======================= ALL MOVIES =======================");
+                            movie.getAllMovies(movies).forEach(System.out::println);
+
+                        }
+                        case 2 -> {
+                            System.out.println("Write movie's name:");
+                            String word = scanner.nextLine();
+                            movie.findMovieByName(movies, word);
+                        }
+                        case 3 -> {
+                            System.out.println("Press 1 to sort by ascending\nPress 2 to sort by descending");
+                            int number = scanner.nextInt();
+                            movie.sortByYear(movies, number);
+                        }
+                        case 4 -> {
+                            System.out.println("Press 1 to sort by A to Z\nPress 2 to sort by Z to A");
+                            int number = scanner.nextInt();
+                            movie.sortByMovieName(movies, number);
+                        }
+                        case 5 -> {
+                            System.out.println("Press 1 to sort by A to Z\nPress 2 to sort by Z to A");
+                            int number = scanner.nextInt();
+                            movie.sortByDirector(movies, number);
+                        }
+                        case 6 -> {
+                            System.out.println("Write actor's name:");
+                            String word = scanner.nextLine();
+                            movie.findMovieByActorName(movies, word);
+                        }
+                        case 7 -> {
+                            System.out.println("Write director's name:");
+                            String word = scanner.nextLine();
+                            movie.findMovieByDirector(movies, word);
+                        }
+                        case 8 -> {
+                            System.out.println("Write year:");
+                            int number = scanner.nextInt();
+                            movie.findMovieByYear(movies, number);
+                        }
+                        case 9 -> {
+                            System.out.println("Write role: ");
+                            String word = scanner.nextLine();
+                            movie.findMovieByRole(movies, word);
+                        }
+                        case 10 -> {
+                            System.out.println("Write actor's name:");
+                            String word = scanner.nextLine();
+                            movie.findMoviesAndRolesByActor(movies, word);
+                        }
+                        case 11 -> movie.sortAllActors(movies);
+                    }
+                }else {
+                    throw new Exception("Number can only be positive!");
                 }
-                case 2 -> {
-                    System.out.println("Write movie's name:");
-                    String word = scanner.nextLine();
-                    movie.findMovieByName(movies, word);
-                }
-                case 3 -> {
-                    System.out.println("Press 1 to sort by ascending\nPress 2 to sort by descending");
-                    int number = scanner.nextInt();
-                    movie.sortByYear(movies, number);
-                }
-                case 4 -> {
-                    System.out.println("Press 1 to sort by A to Z\nPress 2 to sort by Z to A");
-                    int number = scanner.nextInt();
-                    movie.sortByMovieName(movies, number);
-                }
-                case 5 -> {
-                    System.out.println("Press 1 to sort by A to Z\nPress 2 to sort by Z to A");
-                    int number = scanner.nextInt();
-                    movie.sortByDirector(movies, number);
-                }
-                case 6 -> {
-                    System.out.println("Write actor's name:");
-                    String word = scanner.nextLine();
-                    movie.findMovieByActorName(movies, word);
-                }
-                case 7 -> {
-                    System.out.println("Write director's name:");
-                    String word = scanner.nextLine();
-                    movie.findMovieByDirector(movies, word);
-                }
-                case 8 -> {
-                    System.out.println("Write year:");
-                    int number = scanner.nextInt();
-                    movie.findMovieByYear(movies, number);
-                }
-                case 9 -> {
-                    System.out.println("Write role: ");
-                    String word = scanner.nextLine();
-                    movie.findMovieByRole(movies, word);
-                }
-                case 10 -> {
-                    System.out.println("Write actor's name:");
-                    String word = scanner.nextLine();
-                    movie.findMoviesAndRolesByActor(movies, word);
-                }
-                case 11 -> movie.sortAllActors(movies);
+            }catch (InputMismatchException e){
+                System.err.println("Write only numbers!" + e);
+            }catch (Exception e){
+                System.err.println(e.getMessage());
             }
         }
     }

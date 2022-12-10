@@ -3,8 +3,30 @@ public class Director {
     private String lastName;
 
     public Director(String name, String lastName) {
-        this.name = name;
-        this.lastName = lastName;
+        try {
+            if (name.matches("[A-Za-zА-Яа-я]*")){
+                if (name.length() > 2){
+                    this.name = name;
+                }else {
+                    throw new Exception("Director name must be more than 2 letters!");
+                }
+            }else {
+                throw new Exception("Director name must be contain only letters!");
+            }
+            if (lastName.matches("[A-Za-zА-Яа-я]*")){
+                if (lastName.length() > 2){
+                    this.lastName = lastName;
+                }else {
+                    throw new Exception("Director  last name must be more than 2 letters!");
+                }
+            }else {
+                throw new Exception("Director last name must be contain only letters!");
+            }
+
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+
     }
 
     public String getName() {

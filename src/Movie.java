@@ -10,11 +10,19 @@ public class Movie implements Findable,Sortable{
     private List<Cast> cast;
 
     public Movie(String name, int year, String description, Director director, List<Cast> cast) {
-        this.name = name;
-        this.year = year;
-        this.description = description;
-        this.director = director;
-        this.cast = cast;
+        try {
+            this.name = name;
+            if (year > 0 && year < 2022){
+                this.year = year;
+            }else {
+                throw new Exception("Write a valid date!");
+            }
+            this.description = description;
+            this.director = director;
+            this.cast = cast;
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public Movie() {
@@ -114,8 +122,8 @@ public class Movie implements Findable,Sortable{
                     if(counter == 1) {
                         System.out.println(
                                 "\n------------------------------------------------------------" +
-                                        "\n              Actor: " + movie.getCast().get(i).getActorFullName() +
-                                        "\n------------------------------------------------------------");
+                                "\n              Actor: " + movie.getCast().get(i).getActorFullName() +
+                                "\n------------------------------------------------------------");
                     }
 
                     System.out.println(
